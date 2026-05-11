@@ -1,0 +1,27 @@
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+*.ent
+
+# Editor swap files
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# Build output (track source, not compiled PDF)
+*.pdf
