@@ -1,0 +1,820 @@
+% ``<title>''
+% <description>
+%
+% Initial draft begun <date>
+
+\documentclass[letterpaper,11pt]{article}
+%\documentclass[titlepage,a4paper,11pt]{article}
+%% \usepackage{fancyhdr}
+%% \pagestyle{fancy}
+\pagestyle{headings}
+%\pagestyle{plain}  % page numbers only, no headers
+%\pagestyle{empty}  % turn off headers and page numbering
+%\setcounter{secnumdepth}{-2}  % turn off section numbering
+
+%% \usepackage{geometry}  % must go before fancyhdr, if used
+%% \usepackage[hmargin={3cm,3cm},vmargin={4cm,4cm}]{geometry}
+\usepackage[hmargin=1in,vmargin=1in]{geometry}
+\usepackage{graphicx}
+%% \usepackage{tabularx}
+%% \usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{endnotes}
+\usepackage{gensymb}
+
+% customize the header (requires fancyhdr)
+% \renewcommand{\sectionmark}[1]{%
+%   \markboth{#1}{}}
+% \fancyhead[L]{\leftmark}
+% \fancyhead[R]{\thepage}
+% \fancyfoot{} % clear all footer info
+% \renewcommand{\headrulewidth}{0.4pt}
+% \renewcommand{\footrulewidth}{0pt}
+
+% customize the title
+\makeatletter
+\renewcommand{\@maketitle}{%
+  {\noindent \LARGE\bfseries \@title \par}%
+  {\noindent \sc \@author \par}%
+  {\noindent \small \emph{\@date}}%
+  \par
+  \vskip 1.5em
+}
+\makeatother
+
+% another way to customize the title
+% \makeatletter
+% \renewcommand{\@maketitle}{%
+%   \begin{center}%
+%     {\LARGE\bfseries \@title \par}%
+%     {\sc \@author \par}%
+%     {\small \emph{\@date}}%
+%   \end{center}%
+%   \par
+%   \vskip 1.5em
+% }
+% \makeatother
+
+% yet another way to customize the title
+% \makeatletter
+% \renewcommand{\@maketitle}{%
+%   {\noindent \LARGE\bfseries \@title \par}%
+%   \begin{flushright}
+%     {\noindent \sc \@author \par}%
+%     {\noindent \small \emph{\@date}}%
+%   \end{flushright}
+%   \par
+%   \vskip 1.5em
+% }
+% \makeatother
+
+% customize the abstract
+\makeatletter
+\renewenvironment{abstract}
+  {
+  \noindent
+  \hrule
+  \vskip 1em
+  \noindent
+  }
+  {
+  \newline
+  \noindent
+  \hrule
+  }
+\makeatother
+
+% another way to customize the abstract
+% \makeatletter
+% \renewenvironment{abstract}
+%   {
+%   \begin{quotation}
+%   \noindent
+%   \rule[0.5em]{\linewidth}{0.4pt}
+%   \newline
+%   \noindent
+%   }
+%   {
+%   \newline
+%   \noindent
+%   \rule{\linewidth}{0.4pt}
+%   \end{quotation}
+%   }
+% \makeatother
+
+% yet another way to customize the abstract
+% \makeatletter
+% \renewenvironment{abstract}{%
+%   \noindent
+%   \small
+%   {\bfseries \abstractname.}%
+% }
+% \makeatother
+
+%\title{<title>}
+\title{The Pyramids and the Einstellung Effect}
+\author{Peter Coates}
+\date{\today\ (draft)}
+
+\begin{document}
+
+\newcommand{\vm}{Virgin Mobile}
+\newcommand{\js}{Java\-Space}
+\newcommand{\jss}{Java\-Spaces}
+\newcommand{\Cplusplus}{{\rm C\raise.25ex\hbox{\small ++}}}
+\newcommand{\tibco}{TIBCO}
+
+\maketitle
+
+%\pagenumbering{roman}
+
+\begin{abstract}
+More than two hundred years of theories about how the ancient Egyptians raised millions of multi-ton stones as high as 150 meters have centered on variations on a strikingly 
+impractical theme---a long ramp to the top. 
+A ramp to the top, regardless of how it is built, fails on multiple bases, but most obviously because of time. 
+This appears to be a striking instance of the einstellung effect, a quirk of problem solving in which an incorrect but promising approach 
+tantalizes a person or persons trying to solve a problem, leading them to try endless versions of the same idea while blinding them to a completely different, and often simpler solution.
+The continued failure to find a satisfying solution to the pyramid problem indicates an instance of the einstellung effect, and not merely 
+a difficult problem, because relatively simple solutions are not difficult if the idea of a long ramp to the top is abandoned.
+These notes present an example of a simple technique that requires no special tools and allows blocks to be lifted essentially as fast as required, making it 
+unlikely that moving the blocks up would ever have been a bottlneck in the project. 
+\end{abstract}
+
+
+
+%\newpage
+
+%\tableofcontents
+%\newpage
+
+%\pagenumbering{arabic}
+
+\section{Introduction}
+
+These notes are about the two things. 
+The first is the age-old question of how the ancient Egyptians were able to erect the Great Pyramid of Giza, a structure that would 
+remain the tallest building on earth for 3,800 years.  
+Building it required lifting millions of tons of stone blocks, some of them enormous, as high as almost 150 meters, and 
+completing the construction in only 23 years.  
+
+The second subject is psychological. 
+Centuries of proposals about how this gargantuan task might have been accomplished are mostly variations on a general scheme that 
+can be shown to be implausible with back of the envelope math. 
+
+This appears to be a classic instance of the well-known ``einstellung effect'', a quirk of reasoning that can lead to a surprisingly durable failure to solve a 
+problem even though solutions are in easy reach.  
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{/Users/petercoates/my_books_and_writing/pyramid/cheops.png}
+    \caption{The Great Pyramid at Giza, medium albumin print by Francis Firth,1885}
+    \label{fig:my_label}
+\end{figure}
+
+
+In these notes the engineering problem is described, the underlying similarity and implausibility of most proposed solutions is examined, 
+and an example of a straightforward solution that avoids those problems is proposed. 
+
+The point is not that the solution presented is brilliant---the point is the opposite. 
+It is that at least one workable solution that borders on the obvious exists, yet despite this, generation after generation have refined and 
+polished versions of a manifestly unworkable approach.  
+
+
+\section{Ratiocination and the Einstellung Effect}
+
+Ratiocination is a slightly old fashioned name for the mental process of conscious, deliberate inference. 
+It is the reasoning style of Sherlock Holmes: exact and rational.  
+A set of facts are sought out and considered, the engine of logical inference is applied, and a correct conclusion falls out by logical necessity.
+
+But does ratiocination actually exist? It is doubtful. Formal logic is better adapted to testing ideas than to generating them.  
+
+More often, problem solving is a process of three iterated and relatively crude steps. 
+First, we recognize that a new situation or problem resembles a problem we have seen before, sometimes in a very abstract or tenuous way, 
+and we recall that a solution to that problem is known.  
+Then we come up with an idea of how to apply, adapt, or extend that known principle to cover the case at hand. 
+Finally, we test the tentative hypothesis in some way.  
+
+The testing is usually done by quick, informal thought experiments, and in most cases, we immediately discover that the informal
+hypothesis is obviously wrong, dismiss the idea, and return to the starting point to apply the three steps to some other 
+possibly relevant principle. 
+We iterate the process until we either find a solution or move on.   
+
+In this way, we rapidly sift through possibilities and hopefully isolate something in our mental experience that we can iteratively refine 
+and polish by a similar process to fully address the problem at hand.   
+
+The einstellung effect is the name given to a pathology of reasoning that arises naturally from this almost universally practiced heuristic.  
+Approaching a problem with a mindset that has worked for us in the past can fail frustratingly when the approach seems promising, 
+yet repeated refinements seem to inch closer to a solution without ever arriving. 
+The thinker gets stuck indefinitely on a seemingly promising but actually false path,
+tantalized by the feeling that the solution is in reach and the failure is just a matter of details. 
+
+The effect can blind the thinker to an obvious solution, and the blind spot can be extraordinarily persistent. 
+
+\section{The Mechanical Problem}
+
+The Great Pyramid of Cheops consists mostly of stone blocks approximately 1.3 meters square and 0.7 meter's high, weighing from 2.5 to 3.0 tons. That makes a typical block 
+a rectangle about the area of half a sheet of plywood, the height of a dining table, and the weight of a Cadillac Escalade. 
+
+The structure is enormous. It is about 150 meters tall, the height of a forty-story building, and comprises something like 2.3 million such blocks laid in 210 courses.  
+The mass is mostly solid, except for a few relatively small passages, shafts, and halls. 
+
+In addition to the relatively uniform small blocks that make up the bulk of the pyramid, there are also special purpose blocks that can weigh as much 
+as 80 metric tons, and these enormous stones are often far above ground level.
+
+The most famous question is how the ancient Egyptians piled up 2.3 million of these heavy stones without powered machinery, indeed without the use of wheels, 
+but equally interesting are the riddles of how they transported the huge monoliths so far up the structure, and how did they place the massive 
+capstone on top with nowhere to stand? 
+
+Any satisfying solution to the problem of lifting all the little blocks must also allow for, or at least not obstruct, solutions to the other problems.
+
+\section{The Original Hypothesis}
+
+The image you still see the most often is of thousands of workers dragging blocks on rollers up a two-kilometer long earthen ramp. 
+It is an image that has been around since Europeans became fascinated with ancient Egypt in the aftermath of Napoleon's conquest in 1798.
+
+This method is no longer taken very seriously because of fundamental engineering problems. 
+
+The first problem is that a 150 meter high earthen ramp is impractical, bordering on impossible. 
+Skipping all the math, the the most obvious problem is that because packed earth isn't very strong, a ramp has to be wide if it is 
+not going to collapse under its own weight. 
+A strong enough ramp would bulk much larger than the pyramid itself.  
+
+Hard-packed earth is only slightly lighter than the limestone of the pyramids, so gathering, moving, tamping, and then 
+removing and hauling away all that earth would have been a bigger task than erecting the stone. 
+
+Other related structural problems are apparent as soon as the practicalities are considered. 
+For one, the pyramid comes to a point. 
+Because any earthen ramp would have to be quite wide at the top to bear the weight of stone and moving teams,
+the ramp would either need to partly bury the pyramid as it neared the top, or some other way would have to be found to lift 
+hundreds of thousands of blocks above the maximum height of the ramp.  
+
+Another problem is that you can only get off such a ramp at the top, which makes it awkward to use if for such tasks as bringing up the cladding.
+
+We could go on for pages---earthen ramps are not a plan.
+
+
+\section{ The Fundamental Problem  }
+Even if an earthen ramp were practical, the real problem is time. 
+It's worth looking at this carefully because the problem isn't specific to an earthen ramp, but arises with 
+any scheme that depends upon a long ramp. 
+
+We know that the project took about 23 years. 
+Dividing the known number of blocks by the number of work hours in 23 years yields about 90 seconds per block for the duration of the project. 
+This would already be an astonishing rate, but it ignores the time required for work that must precede the stacking of the blocks, such 
+as clearing and leveling the site, preparing docks and yards for the materials, roads to the site, etc. 
+It also ignores the time required for work that must follow the stacking the blocks, such as cladding the structure, tearing down 
+and hauling away the hypothetical long ramp, building the plaza, etc.  
+If the interval when stacking can occur is half of the project's total duration, the required block delivery rate 
+increases to one block every 45 seconds.
+
+Half the volume of the pyramid is in the lower 20\%, so the average number of levels a block must be lifted is 30 meters.
+Assuming a 13:1 slope, at 30 meters high, the ramp would be 400 meters long, and at the maximum height it would 
+be two kilometers long.
+
+A team would have to come off the ramp on average, every 45 seconds, every day, for a decade. 
+They would need to keep moving at all costs, not only on the ramp, but at the top, drop off the block, and quickly get back down 
+the ramp with all their rigging equipment to keep the landing area clear.
+
+Hauling three-ton blocks up a ramp that would eventually grow to two kilometers long is no cakewalk.  
+Even at the average height of a block's destination, the ramp would be the length of four soccer pitches, and the blocks
+would be on heavy wooden rollers, which are cumbersome to manage even on flat ground where stopping is harmless.
+Each block would probably be on a sled of some kind, and the maximum time lapse between adding rollers to the front 
+cannot be more than the time it takes the sled to move half its length---single-digit seconds at any 
+reasonable pace. 
+Getting heavy rollers from the back of the sled to the front fast enough to keep up that pace would take a skilled team 
+and tremendous hustle, because one slip up would stop the block in its tracks while they levered it back up to get a 
+roller under the front.
+
+Even that impossible pace, the scenario is wildly optimistic because it leaves no allowance for ropes breaking, accidents, 
+oxen dropping dead from exhaustion, workers suffering heart attacks or heat prostration, etc., any of which would stop 
+traffic on the entire length of the ramp. 
+
+Because of the tight spacing needed to keep the arrival pace up, even a brief stoppage would be no small thing. 
+Restarting the queue up the ramp would be similar to what we see today in a bumper-to-bumper traffic jam where you can 
+see a ripple of forward motion start far ahead and slowly work backwards toward the rear of the jam.
+To avoid rear-ending the team ahead, the teams would either have to restart almost perfectly synchronously
+or wait for movement to propagate backward through scores of teams. 
+The process might take many minutes, because three tons on rollers cannot simply stop on a steep hill---rollers don't have brakes.
+Haulers would need to hold the block to keep it from moving backward while blocks were positioned behind the rollers. 
+The process would be reversed to restart the block.
+If restarting each block could be done in, say, 15 seconds, it would take 12 minutes for a restart to propagate the length of
+a queue of fifty blocks, plus more for teams enqueued for entry to the ramp. 
+At high levels, the could be many more blocks enqueued than that.
+
+The schedule also doesn't allow for holy days, seasonal variation in the availability of stone, rain making
+the ramp to muddy to use (rain was rare in ancient Egypt, but when it came, it came in torrents), periods when 
+it was too hot to work (frequent in the spring), or for 208 significant stoppages while the enormous work required to raise the 
+ramp by 0.7 meters took place. 
+
+Any long-ramp schemes would face these problems and more because the approach necessarily serializes a 
+large segment of the work. 
+ 
+
+\subsection{ Modern Proposals}
+More up-to-date proposed solutions dispense with the huge earthen ramp by winding the ramp around the pyramid, or building switchback ramps that lean against the pyramid. 
+There's another variant that has the winding ramp inside the pyramid. 
+
+These ideas replace the giant earthen ramp with lighter structures, but considerations of feasibility aside, none of these ideas address the bottleneck problem.  
+Traffic is still single file up a ramp, and any mishap delays everything behind it.
+
+
+\section{ A Final Problem }
+A final problem inherent in long-ramp schemes is that don't adequately address the problem of delivering the oversize monoliths 
+to points far up the structure. 
+With the addition of teams and rigging equipment, a single long ramp would have to be strong enough to support significantly more 
+than eighty tons of moving weight concentrated in a short space over the length of the ramp. 
+Winding ramps would have the same problem, but would also have to be designed to allow these enormous objects to be turned.
+
+
+\section{An Easier Way}
+The model pictured here is not oriented around moving blocks to the current top of the pile, but focusses instead on the small task of 
+moving one block one level up.  
+This small but critical conceptual difference breaks the einstellung dynamic.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{/Users/petercoates/my_books_and_writing/pyramid/tuned_up_model_bw.JPG}
+    \caption{Scale model of two modes of ramp use. Light components represent stone, 1.3m x 1.3m x 0.7m, dark components represent wood. 
+Parallel ramps ascend the face of the pyramid. 
+Similar ramps seen on top, that need not be parallel to the face, could be used internally for uncompleted levels. }
+    \label{fig:ramps_model}
+\end{figure}
+
+
+
+The proposed method that we will describe more fully below relies human teams pulling individual blocks up short wooden ramps that are a 
+single course high---70cm---about the height of a dining table.
+A path of such one-course ramps zig-zags up the side of the pyramid, with the block changing direction with each course.
+
+The ramps are made of wood and are portable. 
+Each would be three or four meters long and the width of a pyramid step. 
+
+Rollers would not be used.
+
+Each block is strapped to a wooden sled, the runners of which are greased to reduce friction on the ramp.  
+A team of nine workers would be strong enough to overcome both the gravity and the friction, but we allocate sixteen workers for safety
+and to make the task repeatable many times during a work day.
+
+Teams do not leave their level during the work day, but pass the sleds bearing the stones on to the next team bucket-brigade style.
+
+There are numerous advantages to this system, but the biggest is that as many teams as there are blocks available for delivery 
+can work in parallel.  
+As we will see, no more than one-third of the available 10,000-member workforce would be sufficient to run a path of such ramps
+from ground-level to the top of the structure, putting more than 200 teams to work in parallel.
+
+At lower levels, where most of the pyramid's volume is, the number of ramps that could be employed is limited by the available work 
+force and the availability of stone to move.  
+The rate at which stone could be delivered to the site would almost certainly be the limit, not the rate at which it could be lifted. 
+
+A conceptual advantage of the system is that it requires no exotic techniques or speculative machinery, but uses only techniques that 
+are known to have been routinely employed througout the project: workers pulling on ropes, simple wooden sledges, ropes, wooden ramps, 
+pry-bars, etc.
+
+The first problem we explore in detail is lifting the 2.3 million small stones.
+
+\subsection{Stone Size}
+The typical dimensions of the stone blocks are 1.3m by 1.3m by 0.7m, with the thickness being the critical measurement, because uniform thickness is
+needed to keep the courses planar. 
+
+The angle of the sides to horizontal is 51.5\degree, which means the ``tread'' of each step up is slightly greater than the rise\endnote{
+A 51.5\degree angle means that if the thickness of a course is 70cm, the width of a step would be 77.52cm.
+}. 
+This is important because it means you could stand a block on edge on any of the steps. 
+
+The proposed method uses the outer edge of each course of blocks as the base for a short wooden ramp about 3.5 meters in length, 
+that rises to the height of the next course of stone, about 0.70 meters.  
+
+This rise and run gives a slope of 1:5, or 0.20. 
+
+
+\subsection{Ramps and Sleds}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{/Users/petercoates/my_books_and_writing/pyramid/ramp_on_sled.JPG}
+    \caption{Detailed model of a ramp and sled. 
+}
+    \label{fig:sled_on_ramp}
+\end{figure}
+
+A block to be raised is bound to a wooden sled standing on its narrow edge. 
+This makes the package a little narrower than the width of a pyramid step, which is convenient for ropes and straps.
+
+The loaded 70cm wide pallet is placed at the foot of the lowest ramp, and dragged up the greased wood rails by a team of 
+workers pulling on a rope or ropes.  
+At the top, having been lifted 0.7 meters, the pallet lands on greased wooden skids that allow it to be easily levered 
+sideways to put it at the base of the next ramp up, which points in the opposite direction. 
+The skids at the top and bottom of ramps are not shown on the model.
+
+A ramp has two raised rails for the sled to slide on.
+Between the is an open area with a laddered series of perpendicular ridges to give a place for a pawl, hinged
+at the back of each sled, to catch. 
+The pawl would drag over the ridges to allow forward motion, but jam into the ridges to arrest backward motion down 
+the ramp in the event of an rope breaking or other unintentional or intentional release of the sled.
+The ramps are furniture; they need not be attached to the masonry, but they may have been tied in some way 
+as a safety measure against tipping. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{/Users/petercoates/my_books_and_writing/pyramid/ramp_sled_underside.JPG}
+    \caption{The sled rides on rails and has insidetracks to keep it aligned. The ramp has ridges to catch a pawl
+on the sled to arrest backward motion. 
+}
+    \label{fig:ramps_and_sled_underside}
+\end{figure}
+
+The sled would have slightly raised wooden rails, like a snow sled, 
+not just to minimize the area of friction, but to allow the bearing surface to be easily replaceable.
+If the project employed 200 ramps for almost a hundred million lifts, each level would be traversed
+several hundred thousand times.
+Sleds and ramps would need to be replaced multiple times over the course of the project, but replaceable wearing surfaces on ramps 
+and sleds would be a great savings in materials and time.
+
+The ramps would have an outer curb so that a sled could not slip sideways off the ramp, and would have a horizontal rail on each 
+side for the sleds rails to ride on.
+The curb is visible on the model.
+Note that the curb would make a sled either right handed or left handed, but the absence of a curb on the inside saves critical width.
+As with the sleds, the bearing surfaces on ramps would be replaceable.
+
+Running a block up the ramp is not a big lift---a ramp is about the length of a middling size room in a house, 
+and the lift is only about tabletop-high.
+
+The short distance means that a team of workers hauling on the rope can drag it to the top of the ramp in a single 
+anaerobic haul taking perhaps twenty or thirty seconds. 
+This is an expenditure of effort similar to what one might make pushing a car that is stuck in the snow, an all-out but quite brief effort. 
+
+After the brief haul, most of the team rests, while a small number of the workers lever the block sideways less than a meter to place 
+it at the base of the next ramp up.  
+Thus, the workers spend the majority of the day resting between bursts of effort lasting perhaps half a minute.
+
+The teams of haulers do not travel up with the block but serve only their own ramp. 
+Instead, the block is passed from team to team up a zig-zag chain or ramps bucket brigade style.
+
+
+\subsection{Fungible Lifts }
+
+Half of the volume of a pyramid is in the bottom 1/5, in our case, the lower 42 courses of blocks, which implies that
+over the project, the average number of lifts per block is 42. 
+Mulitplying by the number of blocks we get a total of approximately 97 million block-lift units to get the job done. 
+Dividing the number of seconds in 23 years, we would need an average lift rate of one block lift every 7.5 seconds. 
+(We will refine this crude estimate later.)
+
+Unlike blocks on a long ramp, these individual block moves are fungible, i.e., any block moving up a ramp is of equal value, from the second layer to the top.
+
+The lifting teams are not responsible for moving the blocks across the flat top of the block's destination level to their final positions. 
+We're assuming that other teams would do that using rollers. We're only concerned here with the means and the math of getting the blocks lifted\endnote{
+We have mostly ignored the need to move blocks horizontally once they arrive on a given level because moving a block on rollers on a 
+flat surface is relatively easy and takes fewer workers. 
+A dozen or fewer workers could roll stones of that size from the edge where they land to their ultimate resting place or to another ramp.  
+The average block travels vertically 52 courses in a process that requires 15 * 52 = 830 workers; a dozen more to roll it across the top 
+is essentially noise in the equation.
+}.
+
+The first layer requires zero lifts because it is ground level. 
+With the first course in place, a path of ramps to the top has a length of only one ramp, which means each path up is only moving one block, 
+one level, every five minutes, which sounds like rather poor performance.
+However, by the time the pyramid is 11 courses high, a path up consists of ten ramps being served simultaneously, resulting in a block lift every thirty 
+seconds on a single path. 
+
+Assume for the moment that a lift team is 16 workers\endnote{
+Studies of competitive tug-of-war give us reasonable values for the pulling capacity of a fit adult male.
+
+%  See: https://www.researchgate.net/publication/354605618_Analysis_of_Tug_of_War_Competition_A_Narrative_Complete_Review
+
+In the drive phase of elite indoor ToW, the maximal pulling forces per man ranged from 792.3 to 1240.7 newtons.  
+The dynamic pulling forces expressed as a percentage of body mass range from 106.4 to 182.5\% of the puller's body weight.  
+
+A typical 1.67 meter tall Egyptian male would have weighed approximately 63.5 kilograms, and thus could pull on a rope with 
+approximately 67.56 to 115.88 kg or 662 to 1112.44 newtons.  
+
+Note, the ToW figures are for adult males pulling on flat floor.  
+Pulling takes muscle power, but muscle power isn't the only factor in play; the puller also needs to transmit that power to the ground, and this is 
+actually the limiting factor because a strong man can pull harder than the forces of friction can keep his feet planted.  
+Much of the skill in ToW is in adjusting one's angle to the floor to give maximum pulling power without one's feet slipping.
+
+This is significant because pyramid workers would have advantages that athletes don't have.  
+For one, they would not be pulling on a flat smooth floor, but on a rough surface that is significantly above the point they are pulling against. 
+This gives them a geometric advantage over a puller on a flat floor, as well as an advantage in friction.  
+In other words, more of the pull is down for the pyramid puller, and the floor gives superb traction.
+}
+and that we allow a maximum of 3328 workers for raising stone. 
+We choose this seemingly random number as an example because a single path all the way to the top would require 208 ramps. 
+With 16 workers per ramp, 208 ramps would require 3328 workers, which is about 1/3 of the budget of 10,000 workers. 
+
+While it is unlikely that the project managers would choose a constant number of lift workers for the duration of the lifting process, 
+we'll make that assumption for simplicity. 
+
+With a 3328 people working in parallel, at course number 11 there would be 20 paths with 10 ramps each, and
+each path would be performing a block lift every thirty seconds.  
+With 20 paths, that is a block lift every 1.5 seconds.  
+
+Note that when we reach a path length of ten ramps, twenty paths consumes almost the entire allocation of 3328 workers. 
+As we go higher, in order to keep the number of workers constant, we must gradually cut back on the number of paths. 
+
+The declining number of paths does not affect the block-movement rate, because the remaining paths have more ramps per path. 
+Therefore, we can always fully employ almost all 3328 workers moving blocks even as the pyramid rises and the number of 
+paths dwindles to one, maintaining the block lift rate of a lift every 1.5 seconds. 
+
+As was explained in arguments against the long-path approach, 24 hours a day for 23 years is not realistic.
+There are 725,328,000 seconds in 23 years, and we have 97,000,000 block lifts to accomplish, which would allow 7.5 seconds for each block lift 
+if lifting went on for that entire time. 
+
+If we assume that construction can go forward only during half the hours of the day, we would have 3.75 seconds per lift, and if we 
+assume that block stacking can only go on for half of the total period of construction, the allowable time per lift 1.875 seconds per lift, 
+which is less than the achievable speed with our 208 ramps. 
+
+Of course, 208 ramps was an arbitrary choice. 
+The pyramid engineers would have been free to use many more during periods when blocks are available in abundance.
+This will be important later.
+
+\subsection{Ramp Angle and Hauling Forces}
+
+We arbitrarily assume a slope of 0.20,  which means that for five meters of horizontal motion, the block is lifted a meter vertically.
+In this case, the vertical lift is 0.70 meters or 70cm , so the horizontal distance is 3.75 meters.  
+Ramp angle presents some trade offs, but we chose the slope of 1:5 for reasons that will be explained. 
+The Egyptians would have chosen intuitively based on whatever slope experience told them maximizes worker productivity while remaining reasonably safe.  
+
+Walking speed for adults is 1.10 to $1.65 m/sec$. 
+If we take the mean, $1.375 m/sec$, it would take about three seconds to walk the horizontal length of a ramp.  
+
+If the haulers drag a stone up a ramp at $1/5$ walking speed, it would be a 15-second, maximum effort haul. 
+At $1/10$ walking speed, it would be a 30 second haul.  
+
+Either way, it would be a strictly anaerobic effort, i.e., a brief, intense effort that relies on the stored glucose in the muscles, 
+not on an inflow of oxygen. 
+A person can put out an enormous level of power when the effort is so brief that they don't have time to get out of breath before it is over. 
+It is the kind of effort a person might put into attempting to push a stuck car out of the snow, or in a tug-of-war, 
+rather than in a sustained athletic activity. 
+
+The blocks weigh between 2.5 and 3.0 metric tons. The larger figure is equal to 29,430 newtons\endnote{
+Newtons are a measure of force, which is mass times the gravitational constant, in our case, 9.81, hence the abbreviation mg.   
+You can think of one newton as being about the heft of an apple (when you are on Earth.) 
+1000 newton = 101.9716213 kilogram-force, or the weight of a large man.
+}. 
+
+Where $\theta$ is the ramp angle, $\mu$ is the coefficient of friction\endnote{
+The coefficient of friction, $\mu$ is a measure of how hard it is to slide something on a surface. 
+A puck on an air-hockey table has a coefficient of friction close to zero. 
+A bag of sand on rough concrete sidewalk has a very high value.   
+The coefficient for greased wood on wood varies with the type of wood and the type of grease, but it is typically in the range.
+
+	$\mu = 0.05  \text{ to }  0.10$ 
+	
+The Egyptians would have used animal fat or oil, so we take $\mu = 0.07$ as a reasonable middle estimate.
+}, which we set at 0.07, and $F$ is the force required to move a block:
+
+\vspace{10pt}
+
+$	F = mg \times (\sin \theta + \mu \cos \theta) $ 
+
+$	F = 29,430 \times (0.196 + 0.07 \times 0.981)$ 
+
+$	F = 29,430 \times (0.196 + 0.069)$ 
+
+$	F = 29,430 \times 0.265$ 
+
+$	F = 7,799 N $
+\vspace{10pt}
+
+7,800 N is equivalent to about 800 kg-force, or 0.37 of the mass of the stone.
+
+%%%% \subsection{Workers Required}
+
+We take the mean pulling power of 67.56 to 115.88 kg which is 91.72, as given elsewhere.
+
+Therefore, we need 800/91.2=8.77 strong workers to drag a block up a 1:5 ramp. 
+
+We  also assume there is no such thing as 0.77 of a worker, so we round up to nine strong workers.
+
+Are ordinary farmers and laborers who do this kind of hauling regularly weaker or stronger than competitive athletes? 
+Who really knows?---farmers are ungodly strong---but let's add in half again that number, giving fourteen haulers per ramp, plus one more to direct, 
+and another for miscellaneous tasks, etc., for a total of sixteen workers per ramp.  
+Intuitively, this seems plausible, if one imagines dragging a heavy object up a shallow ramp\endnote{
+It would be equivalent to dragging three or four sacks of ready-mix concrete on a pallet. 
+}.
+
+
+
+Another reason to bump up the size of the team is that that static friction, i.e. the sticky force haulers must overcome to get the block moving, 
+is significantly higher than kinetic friction, perhaps $\mu = 0.12-0.15$, even on greased wood. 
+That is to say, the initial shove requires more force than maintaining motion.  
+While nine workers should be enough for the main haul, it may require the entire team for the first few seconds to get the block is moving.
+
+
+\subsubsection{Runaway Blocks}
+
+Ropes break. 
+With 97 million block-lifts, it is inevitable and probably not even rare, and you can't have runaway three-ton blocks sliding uncontrolled down a ramp.   
+
+One possible solution to this problem is to use a slope so shallow that if a rope broke, the block would just sit there.  This happens at: 
+
+\vspace{10pt}
+	$\theta_{optimal} = \arctan \mu $
+\vspace{10pt}
+
+Which for $\mu = 0.07$ gives about 4°, or 7\%, slope. 
+
+At this angle the gravity component exactly equals the friction component and the required pulling force is minimized at:
+
+\vspace{10pt}
+	$F_min \approx W × 2\mu / \sqrt(1 + {\mu}^2) \approx 2 × 0.07 × 29,430 \approx 4,120 N \approx 420$ kg-force
+\vspace{10pt}
+
+420 kg-force is not an enormous weight---five strong pullers could easily exert that much force, but it is a very gentle slope with a long ramp. 
+The practical tradeoff is that a steeper slope, say 15-20\%, requires more force but a much shorter ramp, allowing the pull to be done faster.  
+For an anaerobic burst it may not matter much to the team whether 800 kg-force or 420 kg-force, because both are well within their capacity and both are over quickly.
+
+At 75cm rise with a 20\% slope needs about 3.75 meters of horizontal run plus a landing area at each end, say 3 meters, for a total of 9.75 meters.
+
+A 7\% slope needs 10+ meters plus two landing areas, for a total of 16 meters.
+
+The ideal slope is probably somewhere in that range, and would be quickly discovered by the Egyptian engineers. 
+
+If the steeper slope is preferred, the risk of a runaway block can be obviated with the pawl mechanism described above, 
+so the decision on ramp slope would probably come down optimizing the use of the available workers.
+
+
+
+\section{The Pyramid is Not Just Three-Ton Blocks  }
+
+The key to the system for lifting the small blocks is that it breaks the major engineering challenge of block stacking down to the basic operation 
+of moving one block up one level. 
+
+However, there is also the problem of moving giant stones weighing up to 80 tons far up the pile. 
+No ramp the ancients were likely to be able to build would be adequate for that task. 
+It would not be easy even today.
+
+Instead, just as the problem of moving the 2.5 to 3 ton blocks as much as 150 meters up the pile can be reduced to the problem of sliding one block at a 
+time up a single 0.70 meter-high ramp, the problem of elevating the monster stones up fifty or a hundred levels can be reduced to the problem of 
+jacking the component up about a meter high. 
+
+
+\subsection{ Lifting the Monster Blocks }
+
+Consider that lifting the monster stones to a modest height was clearly a solved problem, as they were able to move such stones onto 
+rollers to transport them from quarry to a barge and from a barge to the building site.  
+
+The process for raising the monster stones to high levels in the pyramid would be to first place them in convenient places on the ground level 
+at the beginning, before the stacking process starts. 
+After that, they need only be jacked up about one meter each time a new course is added.
+
+When the layers of the next course approach the location of a large stone, the stone would be jacked up one meter, and 0.70 meter-high standard 
+blocks would be rolled or skidded under it. 
+The large stone would then be set down on rollers so that it can be rolled out of the way to make room for completing the portion of the lower course that is to 
+cover it's former location. 
+When the stones are in place, the large stone would be rolled back to its former location, but one course higher.
+
+In this way, the huge stones would be floated up to their ultimate height in the structure one layer at a time, using no special techniques that were 
+not already used in quarrying and delivering them. 
+
+Something like two or three hundred workers could lift an 80 ton block a meter high within a few hours using levers and wooden blocks. 
+
+The lifting would not be as arduous as it might sound because it is possible to use the stone itself as a counterweight, 
+minimizing the amount of lift required.
+
+The details are not critical to the argument, but the way it this can be done is interesting and does affect the number of workers required.
+
+Assuming an oblong block, levers under the block are used to raise one end ten or twenty centimeters. 
+Low wooden dunnage would then be slid under the block near to the center line, say, half a meter away.  
+The process is then repeated at the other end, placing blocks a similar distance from the center line on the far side, leaving a meter of space between them. 
+When doing the tilts for subsequent lifts, the stone overhanging the block on the far side acts as a counterweight, make it 
+easier to lift the near side.
+
+The process is repeated several times, rocking and lifting the block several centimeters each time. 
+When it is high enough to slide stone blocks under it, plus a few more centimeters for rollers, it is set down by reversing the lift process.  
+
+
+\subsection{The Capstone}
+
+The problem of lifting the enormous capstone onto the top of the pyramid would probably be unsolvable using any technology available in that era. 
+Even today it would be a significant task, as a crane would have to reach halfway across the pyramid, 115 meters, which is 
+beyond the radius of all but a handful of the biggest cranes in the world.
+
+Therefore, we can safely assume that they didn't lift the capstone onto the pyramid. 
+Instead, they would have raised the capstone in the same way that the other giant stones were raised. 
+It would have been rolled onto the very first course and floated all the way up. 
+
+From the second or third to last course, the capstone would be jacked up one meter and blocks would be placed under it. 
+The process would be repeated once or twice more, and for a brief period, the capstone would be perched on a narrow stone pier as 
+much as 2.25 meters high, while the final courses of the pyramid were filled in from below. 
+
+Note that the final few layers of the pyramid would not provide much space for teams pulling large stones up ramps. 
+For the final layers, wooden cranes would have been used to lift the stones.  
+A crane capable of lifting two or three tons would not require wheels, bearings, etc., but could operate like a teeter-totter, as the lift 
+would be less than a meter.  
+
+It would not necessarily need to rotate. 
+With a block suspended, wooden supports could be placed under a lifted block, which could then be 
+dragged into place.
+This would be a cumbersome process for moving large quantities of stone, but not unduely burdensome for the last
+few hundred or perhaps few thousand blocks.
+
+Conventional scaffolding would have been used to provide working space around the final blocks under the capstone.
+
+\section{Project Management}
+
+Civil engineering is as much about management problems as it is about solving technical problems, and once pyramid building technology was worked out, 
+it would have become more about management than engineering. 
+
+
+\subsection{Team Spirit}
+
+As described, this would not be a galley-slave level of work. As most of lifting worker's time would be spent resting between short hauls, 
+men accustomed to farming or construction work would have no trouble sustaining this kind of periodic effort all day.
+
+The construction of the pyramids was a religious and civic exercise, probably paid, and certainly not slave labor. 
+Slaves don't normally have a stake in the labor they do, but with free people doing the work, the bucket-brigade nature of 
+the process lends itself to a competitive team spirit. 
+Nobody wants their team to be the one that breaks the rhythm. 
+Anyone who has worked on a construction site knows the embarrassment of being the guy whom others have to wait for.  
+It's a basic male group dynamic.
+
+
+\subsection{Minimal Engineering}
+
+Throughout the project, highly skilled surveyors would have been needed to ensure that the corner block placements 
+were correct, but relatively little skilled craftsmanship would have been required to place the the vast majority of the blocks.
+The job is basically brick-laying with giant bricks.
+
+
+Building the ramps is rough carpentry. 
+They are identical except for the detail of a curb on one side, so it's easy to 
+make the process of building and maintaining them efficient.  
+
+As the pyramid is being raised, ramps from retired paths would be transferred to the remaining paths. 
+As they are the same width as the pyramid steps, they could be dragged to the nearest ramp and be sent up by the same
+method used to raise the blocks.
+At the completion of the block raising, the last path of ramps would be zippered from the top down, leaving no trace behind,
+except possibly grease stains on the limestone.
+
+\subsection{Flexibility}
+
+We saw that one of the most obvious problems with all of the single ramp approaches is that any problem on the ramp brings  
+block movement behind it to a halt.
+
+With the parallelized approach, a problem with a single ramp need not stop traffic on any other path, indeed,  
+in many cases, it need not stop traffic even on the path is part of.
+
+This is because a small staging area could be left open at each level so that in the event of ramp having a problem, teams below 
+that point would have space to stash a few stones 
+while they wait for the problem above their level be cleared. Similarly, teams above a blocked ramp could send up stones that would 
+otherwise have remained permanently their level, in 
+order to keep the maximum number of ramp teams moving stone.
+
+The buffering concept described above prevents a local problem from stalling all the workers ahead and behind. 
+Notice that once again, this works because the system lets you treat any block moving up a level as a fungible unit of work.  
+As long as a block moves up, it's good, and blocks never move down.
+
+
+\subsection{Seasonality}
+
+The method is fast enough and expandable enough that most or all of the available workforce could be applied to loading and 
+unloading stone when river levels are conducive to shipping, accumulating large stores of stone at the base to be raised up the 
+pile when shipping is slack and workers are available for lifting.
+
+\subsubsection{Barn Raising Model}
+
+As an alternative to spending a third of the worker budget on lifting crews, which is mostly low-skill labor, most of 
+the workers could be assigned to quarrying and delivering stone for the majority of their work year. 
+Periodically a large number of citizens could turn out for a limited-time Amish-style barn raising during which huge amounts 
+of stone would be raised in a short burst in order to clear the storage yards for another season of stone delivery.
+
+\subsubsection{Dry Spells}
+Planners would know when shipping season begins and ends. 
+As long as blocks move up, progress continues, so during the dry spell, engineers could keep moving up blocks that would otherwise
+be permanently left in place.
+This would make one side of the structure higher and the other side lower, but no effort is wasted as all movement 
+up is equally valuable, and the side getting lower would only do so by having its blocks move higher. 
+
+Seasonal variation in block delivery rates would be mostly predictable, so as the low-availbility period drew nigh,
+they would not bother to carefully fit the blocks, but just use the flat top as a storage location in which to buffer large
+amounts of stone to raise during the period of reduced availability of stone. 
+(This is the reason for showing the alternative perpendicular ramps on the top of the model.)
+In the lower levels where most of the stone is, lifting could coninue on as nine or ten levels using stone that is already far
+up the pyramid.
+
+\section{Final Words }
+
+We don't really have enough information on the relative cost of quarrying and moving the stone to the site to estimate exactly 
+how the project managers would have allocated resources. 
+
+The critical thing is that by using a simple strategy like this, it would have been possible to scale the process of lifting 
+the stones to almost any required rate. 
+This would make the limiting factor in building the pyramid quarrying blocks and delivering them to the 
+site, and not the effort of stacking them.
+The strategy also provides a natural way to lift stone components of any size the builders could get to the site using only 
+the same simple tools they used to move them in the quarry and to and from barges. 
+
+There is something deep here about how humans think.  
+That modern people in a world full of zig-zagging stairwells still try to improve on the same single ramp idea 
+that cannot possibly work is remarkable.  
+
+It seems that someone in Napoleon's generation published their first thought, ``ramp'', and for more than 200 years, people have 
+contorted that original idea of a single long ramp into countless variations, rather than applying the simple and 
+seemingly obvious zig-zag pattern which even today we almost exclusively use for manually lifting ourselves and our 
+packages up multiple levels.
+
+\theendnotes
+
+\end{document}               % End of document.
